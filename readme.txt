@@ -14,13 +14,13 @@ Manage your website while you're browsing it. Live Dashboard adds the full flexi
 
 With Live Dashboard, you can manage your website as you're browsing it. Using the Theme Customizer template used in all Live Admin plugins, it shows all your handy dashboard widgets and the WordPress admin menu in a hideable sidebar.
 
-=Usage=
+= Usage =
 
 After you installed Live Dashboard, you get a metabox on the top of your Dashboard prompting you to try Live Dashboard or set it as your default dashboard.
 
 In Live Dashboard you can always switch back to the WP Dashboard by click 'Switch Interface'. To set the default dashboard, go to Users->Your Profile.
 
-=Features=
+= Features =
 
 *   All Dashboard functionalities readily accessible, including custom meta boxes of other plugins
 *   Set Live Dashboard as default on a per-user basis
