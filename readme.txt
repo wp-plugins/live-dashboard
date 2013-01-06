@@ -35,6 +35,7 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 == Screenshots ==
 
 1. Live Dashboard in action
+1. Non-intrusive welcome widget allows users to active Live Dashboard
 
 == Changelog ==
 
