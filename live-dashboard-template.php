@@ -4,13 +4,19 @@ if ( !defined ( 'ABSPATH' ) )
     exit;
 
 if ( ! class_exists ( 'WP_LiveDashboard_Template' ) ) :
-    /**
-     * @todo remember collapsed state
-     */
+
     class WP_LiveDashboard_Template extends WP_LiveAdmin
     {
 
         public function __construct() {
+            if ( isset ( $_REQUEST['current-page' ] ) && ! empty ( $_REQUEST['current-page' ] ) ) {
+                $iframe_url = $_REQUEST['current-page'];
+                if ( ! strpos ( $iframe_url, get_bloginfo('url') ) )
+                    $iframe_url = get_bloginfo('wpurl') . '/' . $iframe_url;
+
+                $this->iframe_url = $iframe_url;
+            }
+
             $this->menu = true;
             $this->screen_options = true;
             $this->remember_sidebar_state = true;
@@ -31,11 +37,15 @@ if ( ! class_exists ( 'WP_LiveDashboard_Template' ) ) :
                     );
 
             $this->info_notice = sprintf( __( 'You are administring %s', 'live-admin' ), '<strong class="site-name">' . get_bloginfo('name') . '</strong>' );
+            $quick_action = '';
+            if ( post_type_exists( 'post' ) ) $quick_action .= '<li class="left-gray"><a href="' . admin_url ('post-new.php') . '"><div id="icon-edit" class="icon32"></div>New Post</a></li>';
+            if ( post_type_exists( 'page' ) ) $quick_action .= '<li class="right-gray"><a href="' . admin_url ('post-new.php?post_type=page') . '"><div id="icon-edit-pages" class="icon32"></div>Add Page</a></li>';
+
             $this->info_content =
-                        '<ul class="quick-actions">
-                            <li class="left-gray"><a href="' . admin_url ('post-new.php') . '"><div id="icon-edit" class="icon32"></div>New Post</a></li>
-                            <li class="right-gray"><a href="' . admin_url ('post-new.php?post_type=page') . '"><div id="icon-edit-pages" class="icon32"></div>Add Page</a></li>
-                        </ul>
+                        '<ul class="quick-actions">' . $quick_action .
+                            //<li class="left-gray"><a href="' . admin_url ('post-new.php') . '"><div id="icon-edit" class="icon32"></div>New Post</a></li>
+                            //<li class="right-gray"><a href="' . admin_url ('post-new.php?post_type=page') . '"><div id="icon-edit-pages" class="icon32"></div>Add Page</a></li>
+                        '</ul>
 
                         <div>
                             <a href="' . $this->switch_url() . '" style="float:left">Switch interface</a>

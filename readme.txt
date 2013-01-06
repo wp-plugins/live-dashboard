@@ -4,7 +4,7 @@ Tags: dashboard, live admin
 Donate link: http://trenvo.com/wordpress-live-dashboard
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.1
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,3 +35,13 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 == Screenshots ==
 
 1. Live Dashboard in action
+
+== Changelog ==
+
+= 0.1.1 =
+* Fix in loading of language files (thanks yuriy for pointing this out)
+* Added seamless switching to Live Dashboard from front end using the admin bar (thanks mrgreenneon92)
+* Most links in WP admin now link to Live Dashboard (View Post, etc.)
+
+= 0.1 =
+* Initial release

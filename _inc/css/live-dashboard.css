@@ -51,7 +51,8 @@
 #live-admin-info.open .customize-section-title { padding-bottom: 0; }
 
 /* Quick actions */
-.quick-actions li { margin: 0 10px 10px 0; padding: 10px; float: left; font-weight: bold; text-align: center; width: 40%; }
+.quick-actions { overflow: auto; }
+.quick-actions li { margin: 0 10px 10px 0; padding: 10px; float: left; font-weight: bold; text-align: center; width: 39%; }
 
 .quick-actions li div { display: block; float: none !important; margin: 0 auto 0 auto;}
 

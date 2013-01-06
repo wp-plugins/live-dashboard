@@ -3,7 +3,7 @@
   Plugin Name: Live Dashboard
   Plugin URI: http://trenvo.com/wordpress-live-dashboard
   Description: Manage your website while you're browsing it.
-  Version: 0.1
+  Version: 0.1.1
   Author: Mike Martel
   Author URI: http://trenvo.com
  */
@@ -17,7 +17,7 @@ if ( !defined ( 'ABSPATH' ) )
  *
  * @since 0.1
  */
-define ( 'LIVE_DASHBOARD_VERSION', '0.1' );
+define ( 'LIVE_DASHBOARD_VERSION', '0.1.1' );
 
 /**
  * PATHs and URLs
@@ -43,11 +43,27 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             global $live_dashboard;
 
             if ( ! $live_dashboard ) {
-                load_plugin_textdomain ( 'live-dashboard', false, LIVE_DASHBOARD_DIR . '/languages/' );
+                load_plugin_textdomain ( 'live-dashboard', false, basename ( LIVE_DASHBOARD_DIR ) . '/languages/' );
                 $live_dashboard = new WP_LiveDashboard;
             }
 
             return $live_dashboard;
+        }
+
+        /**
+         * Separate loader for front-end actions
+         *
+         * @since 0.1.1
+         */
+        public static function &frontend_init() {
+            if ( is_admin_bar_showing() && ! is_admin() ) {
+                add_filter('admin_url', array ( 'WP_LiveDashboard', 'change_admin_link' ), 10, 2 );
+            }
+        }
+
+        public static function change_home_url ( $url, $path ) {
+            $url = add_query_arg ( array ( "current-page" => urlencode ( $path ) ), admin_url() );
+            return $url;
         }
 
         /**
@@ -65,9 +81,12 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             require_once ( LIVE_DASHBOARD_DIR . 'lib/live-admin/live-admin.php' );
             $this->settings = new WP_LiveAdmin_Settings( 'dashboard', __('Live Dashboard', 'live-dashboard'), __('Combine browsing and administring your website with your full dashboard in a sidebar to your website','live-dashboard'), 'false', 'index.php' );
 
+            if ( $this->settings->is_default() )
+                add_filter('home_url', array ( 'WP_LiveDashboard', 'change_home_url' ), 10, 2 );
+
             // The settings screen is the only business @ network admin
             if (is_network_admin() )
-                return
+                return;
 
             $this->maybe_set_as_default();
 
@@ -81,7 +100,7 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
              * PHP4
              *
              * @since 0.1
-                 */
+             */
             public function WP_LiveAdmin() {
                 $this->__construct ();
             }
@@ -127,7 +146,7 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             $set_as_default_url = esc_html( add_query_arg( 'set_as_default', wp_create_nonce( 'live_dashboard_set_as_default' ) ) );
 
             ?>
-            <p>Welcome to your WordPress dashboard. You have installed Live Dashboard, but not set it as your default dashboard. Using Live Dashboard you can conveniently access your WP admin while browsing your site.</p>
+            <p><?php _e('Welcome to your WordPress dashboard. You have installed Live Dashboard, but not set it as your default dashboard. Using Live Dashboard you can conveniently access your WP admin while browsing your site.', 'live-dashboard'); ?></p>
             <div style="float:right">
                 <a href="<?php echo $switch_url ?>">Try it first</a>
                 <form method="post" style='display:inline'>
@@ -139,7 +158,24 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             <?php
         }
 
-    }
+        /**
+         * Changes all requests for admin_link (without param)
+         * to include a request param for current-page
+         *
+         * @param str $url
+         * @param str $path
+         * @return str
+         */
+        public static function change_admin_link( $url, $path ) {
+            if ( empty ( $path )
+                    && empty( $GLOBALS['_wp_switched_stack'] )
+                    && strlen ( $_SERVER['REQUEST_URI'] ) > 1
+                )
+                $url = add_query_arg ( array ( "current-page" => urlencode ( substr ( $_SERVER['REQUEST_URI'], 1 ) ) ),$url);
+            return $url;
+        }
 
+    }
     add_action ( 'admin_init', array ( 'WP_LiveDashboard', 'init' ), 999 );
+    add_action ( 'init', array ( 'WP_LiveDashboard', 'frontend_init') );
 endif;
