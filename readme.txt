@@ -8,7 +8,7 @@ Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Manage your website while you're browsing it. Live Dashboard adds the full flexibility of the WordPress Dashboard to the front end.
+Manage your website while you're browsing it
 
 == Description ==
 
