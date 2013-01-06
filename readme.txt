@@ -4,7 +4,7 @@ Tags: dashboard, live admin
 Donate link: http://trenvo.com/wordpress-live-dashboard
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,8 +36,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 1. Live Dashboard in action
 1. Non-intrusive welcome widget allows users to active Live Dashboard
+1. Live Dashboard in action on a production site
 
 == Changelog ==
+
+= 0.1.3 =
+* Changed the way links are redirected to Live Dashboard (now uses JS)
 
 = 0.1.2 =
 * Improvements to dashboard widget (when Live Dashboard is not default)
