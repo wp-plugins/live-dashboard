@@ -1,5 +1,13 @@
-.postbox-title-action {
-    display: none;
+.js #dashboard-widgets h3 .postbox-title-action {
+    top: initial;
+    right: 40px;
+}
+#dashboard-widgets h3 .postbox-title-action a {
+    color: white;
+    font-size: 12px;
+}
+#dashboard-widgets h3 .postbox-title-action a:hover {
+    color: #ccc;
 }
 
 .wp-full-overlay-sidebar-content div#message.updated a { display: none; }
