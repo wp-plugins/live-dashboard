@@ -3,7 +3,7 @@
   Plugin Name: Live Dashboard
   Plugin URI: http://trenvo.com/wordpress-live-dashboard
   Description: Manage your website while you're browsing it.
-  Version: 0.2
+  Version: 0.2.1
   Author: Mike Martel
   Author URI: http://trenvo.com
  */
@@ -17,7 +17,7 @@ if ( !defined ( 'ABSPATH' ) )
  *
  * @since 0.1
  */
-define ( 'LIVE_DASHBOARD_VERSION', '0.2' );
+define ( 'LIVE_DASHBOARD_VERSION', '0.2.1' );
 
 /**
  * PATHs and URLs
@@ -137,7 +137,7 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             // Backup and delete our new dashbaord widget from the end of the array
 
             $dashboard_live_dash_backup = array('dashboard_live_dash' => $wp_meta_boxes['dashboard']['normal']['core']['dashboard_live_dash']);
-            unset($normal_dashboard['dashboard_live_dash']);
+            unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_live_dash']);
 
             // Merge the two arrays together so our widget is at the beginning
 

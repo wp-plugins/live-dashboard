@@ -4,7 +4,7 @@ Tags: dashboard, live, admin
 Donate link: http://trenvo.com/wordpress-live-dashboard
 Requires at least: 3.5
 Tested up to: 3.5
-Stable tag: 0.2
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,10 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 1. Live Dashboard in action on a production site
 
 == Changelog ==
+
+= 0.2.1 =
+* Fix that two dashboard widgets would show up (thanks Blogurp)
+* Allow browsing within the same domain (so Live Dash is still visible when browsing subdomain multisite)
 
 = 0.2 =
 * Added keyboard shortcuts for screen options (s) and menu (m)

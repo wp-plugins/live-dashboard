@@ -20,6 +20,7 @@ if ( ! class_exists ( 'WP_LiveDashboard_Template' ) ) :
             $this->menu = true;
             $this->screen_options = true;
             $this->remember_sidebar_state = true;
+            $this->allow_same_domain_links = true;
             //$this->collapsed = true;
 
             $this->pointers = array(
