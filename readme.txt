@@ -28,6 +28,8 @@ In Live Dashboard you can always switch back to the WP Dashboard by click 'Switc
 
 *If you want to help develop this plugin, visit the [GitHub repo](https://github.com/mgmartel/WP-Live-Dashboard).*
 
+**Live Dashboard is part of [Live Admin](http://trenvo.com) and works great with [Live Theme Preview](http://wordpress.org/extend/plugins/live-theme-preview/), [WP Getting Started](http://wordpress.org/extend/plugins/wp-getting-started/) and  [Live Editor](https://github.com/mgmartel/WP-Live-Editor)**
+
 == Installation ==
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
@@ -39,6 +41,11 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 1. Live Dashboard in action on a production site
 
 == Changelog ==
+
+= 0.3 =
+* Added widget to switch back to Live Dashboard
+* Added extra quickmenu to the live dashboard
+* Fix: don't interfere network admin links
 
 = 0.2.1 =
 * Fix that two dashboard widgets would show up (thanks Blogurp)
