@@ -3,7 +3,7 @@
   Plugin Name: Live Dashboard
   Plugin URI: http://trenvo.com/wordpress-live-dashboard
   Description: Manage your website while you're browsing it.
-  Version: 0.2.1
+  Version: 0.3
   Author: Mike Martel
   Author URI: http://trenvo.com
  */
@@ -17,7 +17,7 @@ if ( !defined ( 'ABSPATH' ) )
  *
  * @since 0.1
  */
-define ( 'LIVE_DASHBOARD_VERSION', '0.2.1' );
+define ( 'LIVE_DASHBOARD_VERSION', '0.3' );
 
 /**
  * PATHs and URLs
@@ -78,7 +78,7 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             require_once ( LIVE_DASHBOARD_DIR . 'lib/live-admin/live-admin.php' );
             $this->settings = new WP_LiveAdmin_Settings( 'dashboard', __('Live Dashboard', 'live-dashboard'), __('Combine browsing and administring your website with your full dashboard in a sidebar to your website','live-dashboard'), 'false', 'index.php' );
 
-            if ( $this->settings->is_default() ) {
+            if ( $this->settings->is_default() && !is_network_admin() ) {
                 wp_enqueue_script( 'live-dashboard-links', LIVE_DASHBOARD_INC_URL . 'js/live-dashboard-links.js', array ('jquery'), 0.1, true );
                 wp_localize_script( 'live-dashboard-links', 'liveDashboardLinks', array(
                     "site_url"  => get_bloginfo('wpurl'),
@@ -93,8 +93,9 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             $this->maybe_set_as_default();
 
             if ( $this->settings->is_active() ) {
+                require ( LIVE_DASHBOARD_DIR . 'lib/quick-menu/quick-menu.php');
                 require ( LIVE_DASHBOARD_DIR . 'live-dashboard-template.php' );
-            } elseif ( ! $this->settings->is_default() )
+            } else
                 add_action ( 'wp_dashboard_setup', array ( &$this, 'add_dashboard_widget' ) );
         }
 
@@ -122,8 +123,15 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
             }
         }
 
+        public function add_switched_dashboard_widget() {
+            wp_add_dashboard_widget( 'dashboard_live_dash', __( 'Live Dashboard', 'live-dashboard' ), array ( &$this, 'switched_dashboard_widget' ) );
+        }
+
         public function add_dashboard_widget() {
-            wp_add_dashboard_widget( 'dashboard_live_dash', __( 'Live Dashboard', 'live-dashboard' ), array ( &$this, 'dashboard_widget' ) );
+            if ( $this->settings->is_default() )
+                wp_add_dashboard_widget( 'dashboard_live_dash', __( 'Live Dashboard', 'live-dashboard' ), array ( &$this, 'switched_dashboard_widget' ) );
+            else
+                wp_add_dashboard_widget( 'dashboard_live_dash', __( 'Live Dashboard', 'live-dashboard' ), array ( &$this, 'dashboard_widget' ) );
 
             // Globalize the metaboxes array, this holds all the widgets for wp-admin
 
@@ -165,6 +173,19 @@ if ( ! class_exists ( 'WP_LiveDashboard' ) ) :
 
                     <input type="submit" class="button-primary" value="Set as Default">
                 </form>
+            </div>
+            <div class="clear"></div>
+            <?php
+        }
+
+        public function switched_dashboard_widget() {
+            $switch_url = $this->settings->switch_url();
+
+            ?>
+            <a href="http://wordpress.org/extend/plugins/live-dashboard/" target="_new"><img src="<?php echo LIVE_DASHBOARD_INC_URL . 'images/dashboard_logo.png'; ?>" style="float:left;margin-right:10px;width:84px;height:84px;"></a>
+            <p><?php _e('You have switched away from Live Dashboard. Click the button below to switch back.', 'live-dashboard'); ?></p>
+            <div style="float:right">
+                <a class="button-primary" href="<?php echo $switch_url ?>">Switch to Live Dashboard</a>
             </div>
             <div class="clear"></div>
             <?php
