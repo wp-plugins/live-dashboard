@@ -62,6 +62,7 @@ if ( ! class_exists ( 'WP_LiveDashboard_Template' ) ) :
 
             add_action('before_live_admin_preview', array ( &$this, 'do_welcome_panel' ) );
             add_action('live_admin_after_collapse_sidebar', array ( &$this, 'show_dash_button' ) );
+            add_filter ( 'wpgs_dashboard_pointers', array ( &$this, 'first_step_pointer' ) );
 
         }
 
@@ -74,6 +75,21 @@ if ( ! class_exists ( 'WP_LiveDashboard_Template' ) ) :
             wp_enqueue_script( 'live-dashboard', LIVE_DASHBOARD_INC_URL .'js/live-dashboard.js', array ('jquery') );
         }
 
+        public function first_step_pointer ( $pointers ) {
+            return array (
+                array(
+                    'id' => 'wpgs_first_step',
+                    'screen' => 'dashboard',
+                    'target' => '.welcome-progression-choose a p',
+                    'title' => __ ( 'Getting Started', 'wp-getting-started' ),
+                    'content' => __( 'Click on the icon above to start creating your website.', 'wp-getting-started' ),
+                    'position' => array(
+                        'edge' => 'top',
+                        'align' => 'left'
+                    )
+                )
+            );
+        }
 
         public function do_start() {
             global $title, $parent_file, $admin_title, $handle;

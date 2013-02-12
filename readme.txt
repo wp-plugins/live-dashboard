@@ -3,8 +3,8 @@ Contributors: Mike_Cowobo
 Tags: dashboard, live, admin
 Donate link: http://trenvo.com/wordpress-live-dashboard
 Requires at least: 3.5
-Tested up to: 3.5
-Stable tag: 0.3
+Tested up to: 3.5.1
+Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,12 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 1. Live Dashboard in action on a production site
 
 == Changelog ==
+
+= 0.3.2 =
+* Fix for compatibility with PHP5.4
+
+= 0.3.1 =
+* Better Welcome Panel
 
 = 0.3 =
 * Added widget to switch back to Live Dashboard

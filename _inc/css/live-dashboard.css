@@ -84,4 +84,5 @@
     left: 50%;
     margin-left: -45%;
     max-height: 90%;
+    z-index: 1;
 }

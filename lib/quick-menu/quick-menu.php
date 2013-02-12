@@ -44,7 +44,7 @@ if (!class_exists('WP_QuickMenu')) :
             static $instance = false;
 
             if (!$instance) {
-                load_plugin_textdomain('quick-menu', false, basename ( QUICK_MENU_DIR ) . '/languages/');
+                load_plugin_textdomain('quick-menu', false, basename ( WP_QUICK_MENU_DIR ) . '/languages/');
                 $instance = new WP_QuickMenu;
             }
 
