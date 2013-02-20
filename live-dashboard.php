@@ -3,7 +3,7 @@
   Plugin Name: Live Dashboard
   Plugin URI: http://trenvo.com/wordpress-live-dashboard
   Description: Manage your website while you're browsing it.
-  Version: 0.3.1
+  Version: 0.3.3
   Author: Mike Martel
   Author URI: http://trenvo.com
  */
@@ -17,7 +17,7 @@ if ( !defined ( 'ABSPATH' ) )
  *
  * @since 0.1
  */
-define ( 'LIVE_DASHBOARD_VERSION', '0.3' );
+define ( 'LIVE_DASHBOARD_VERSION', '0.3.3' );
 
 /**
  * PATHs and URLs
